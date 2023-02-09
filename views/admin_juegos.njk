@@ -1,0 +1,26 @@
+{% extends "admin_base.njk" %}
+{%block contenido%}
+{% for juego in juegos %}
+    <div class="row m-1">
+        <div class="col-6">{{ juego.nombre }}</div>
+        <div class="col-auto">
+            <a class="btn btn-success" href="/juegos/{{ juego.id }}">Ver ficha</a>
+        </div>
+        {# {% if (session and session.usuario) %} #}
+            <div class="col-auto">
+                <form action="/admin/juegos/{{ juego.id }}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </form>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-primary" href="/admin/juegos/editar/{{ juego.id }}">Editar</a>
+            </div>
+        {# {% endif %} #}
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-12">No hay juegos que mostrar.</div>
+    </div>
+{% endfor %}
+{%endblock%}
